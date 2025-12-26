@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تطبيق </title>
+  <style>
+    :root { --primary:#dc2626; --bg:#f5f7fb; --card:#ffffff; }
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+    body { margin:0; background:var(--bg); min-height:100vh; display:flex; align-items:center; justify-content:center; }
+    .app { width:100%; max-width:420px; padding:16px; }
+    .card { background:var(--card); border-radius:20px; padding:20px; box-shadow:0 15px 35px rgba(0,0,0,.12); }
+    h1 { font-size:22px; margin:0 0 16px; text-align:center; color:#1f2937; }
+    .field { margin-bottom:12px; }
+    label { display:block; font-size:14px; margin-bottom:6px; color:#334155; }
+    input { width:100%; padding:12px; border-radius:12px; border:1px solid #cbd5e1; font-size:16px; }
+    button { width:100%; padding:14px; border-radius:14px; border:none; background:linear-gradient(135deg,#dc2626,#991b1b); color:#fff; font-size:17px; font-weight:600; cursor:pointer; }
+    button:active { transform: translateY(1px); }
+    .table-wrap { margin-top:16px; display:none; }
+    table { width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; }
+    th, td { padding:10px; text-align:center; border-bottom:1px solid #e5e7eb; }
+    th { background:#eef2ff; }
+    tr:last-child td { border-bottom:none; }
+    .error { color:#dc2626; font-size:14px; margin-top:8px; display:none; text-align:center; }
+    
+  .nav-item { font-size:14px; color:#475569; cursor:pointer; }
+  .nav-item.active { color:#dc2626; font-weight:700; }
+</style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <h1>الصفحة الرئيسية</h1>
+      <div class="field">
+        <label>الرقم الشخصي</label>
+        <input id="personal" inputmode="numeric" placeholder="" />
+      </div>
+      <div class="field">
+        <label>الرقم الأكاديمي</label>
+        <input id="academic" inputmode="numeric" placeholder="" />
+      </div>
+      <div class="field">
+        <label>السنة الدراسية</label>
+        <input id="year" inputmode="numeric" placeholder="" />
+      </div>
+      <button onclick="checkUser()">دخول</button>
+      <div class="error" id="error">البيانات غير صحيحة</div>
+
+      <div class="table-wrap" id="tableWrap">
+        <div class="card" style="margin-bottom:12px;">
+          <h1 style="font-size:18px;">معلومات الطالب</h1>
+          <p id="infoPersonal">الرقم الشخصي: -</p>
+          <p id="infoAcademic">الرقم الأكاديمي: -</p>
+          <p id="infoYear">السنة الدراسية: -</p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>المادة</th><th>الدرجة</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>العربي</td><td>97</td></tr>
+            <tr><td>دين</td><td>98</td></tr>
+            <tr><td>إنجليزي</td><td>94</td></tr>
+            <tr><td>فيزياء</td><td>92</td></tr>
+            <tr><td>رياضيات</td><td>93</td></tr>
+            <tr><td>رياضيات (2)</td><td>94</td></tr>
+          </tbody>
+        </table>
+      </div>
+          
+            
+    </div>
+  </div>
+
+  <script>
+    function checkUser() {
+      const p = document.getElementById('personal').value.trim();
+      const a = document.getElementById('academic').value.trim();
+      const y = document.getElementById('year').value.trim();
+      const ok = (p === '091006295') || (a === '615') || (y === '2024');
+      if(ok){
+        document.getElementById('infoPersonal').innerText = 'الرقم الشخصي: ' + (p || '-');
+        document.getElementById('infoAcademic').innerText = 'الرقم الأكاديمي: ' + (a || '-');
+        document.getElementById('infoYear').innerText = 'السنة الدراسية: ' + (y || '-');
+      }
+      document.getElementById('error').style.display = ok ? 'none' : 'block';
+      document.getElementById('tableWrap').style.display = ok ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
